@@ -25,21 +25,23 @@ description: "Real-time financial data API with minutes-fresh updates from SEC f
         Real-time financial data API with <span className="text-green-600 dark:text-green-400 font-semibold">minutes-fresh updates</span> from SEC filings
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-        <Card
-          title="Start Free Trial"
-          href="/guides/free-trial"
-          horizontal
-          icon="rocket"
-          cta="Get 250 free API calls"
-        />
-        <Card
-          title="View API Reference"
-          href="#api-reference"
-          horizontal
-          icon="terminal"
-          cta="Explore endpoints"
-        />
+      <div className="mt-8 max-w-2xl mx-auto">
+        <Columns cols={2}>
+          <Card
+            title="Start Free Trial"
+            href="/guides/free-trial"
+            icon="rocket"
+          >
+            Get 250 free API calls with major companies
+          </Card>
+          <Card
+            title="View API Reference"
+            href="/introduction"
+            icon="terminal"
+          >
+            Explore all available endpoints
+          </Card>
+        </Columns>
       </div>
     </div>
   </div>
