@@ -2335,90 +2335,6 @@
     },
     "/v1/company/shares-outstanding": {
       "get": {
-        "400": {
-          "description": "Bad Request",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "errors": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "message": {
-                          "type": "string",
-                          "example": "Missing required parameters: either Company Key, CUSIP, ISIN, or Ticker + Exchange"
-                        }
-                      },
-                      "required": [
-                        "message"
-                      ]
-                    }
-                  }
-                },
-                "required": [
-                  "errors"
-                ]
-              }
-            }
-          }
-        },
-        "403": {
-          "description": "Forbidden",
-          "content": {
-            "application/json": {
-              "schema": {
-                "_def": {
-                  "unknownKeys": "strip",
-                  "catchall": {
-                    "_def": {
-                      "typeName": "ZodNever"
-                    },
-                    "~standard": {
-                      "version": 1,
-                      "vendor": "zod"
-                    }
-                  },
-                  "typeName": "ZodObject"
-                },
-                "~standard": {
-                  "version": 1,
-                  "vendor": "zod"
-                },
-                "_cached": null
-              }
-            }
-          }
-        },
-        "404": {
-          "description": "Not Found",
-          "content": {
-            "application/json": {
-              "schema": {
-                "_def": {
-                  "unknownKeys": "strip",
-                  "catchall": {
-                    "_def": {
-                      "typeName": "ZodNever"
-                    },
-                    "~standard": {
-                      "version": 1,
-                      "vendor": "zod"
-                    }
-                  },
-                  "typeName": "ZodObject"
-                },
-                "~standard": {
-                  "version": 1,
-                  "vendor": "zod"
-                },
-                "_cached": null
-              }
-            }
-          }
-        },
         "tags": [
           "Shares Outstanding"
         ],
@@ -2556,6 +2472,96 @@
                       "shareClasses"
                     ]
                   }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Missing required parameters: either Company Key, CUSIP, ISIN, or Ticker + Exchange"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Invalid api key"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Not Found"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
                 }
               }
             }
