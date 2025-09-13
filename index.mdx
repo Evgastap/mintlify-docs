@@ -1,97 +1,243 @@
 ---
-title: "Introduction"
-description: "Welcome to the new home for your documentation"
+title: "Fiscal.ai API Documentation"
+description: "Real-time financial data API with minutes-fresh updates from SEC filings"
 ---
 
-## Setting up
+<div className="relative">
+  <div className="absolute top-0 lg:-top-16 left-0 right-0 opacity-30">
+    <img
+      src="/images/hero-light.png"
+      className="block dark:hidden pointer-events-none"
+    />
+    <img
+      src="/images/hero-dark.png"
+      className="hidden dark:block pointer-events-none"
+    />
+  </div>
 
-Get your documentation site up and running in minutes.
+  <div className="px-4 py-16 lg:py-48 lg:pb-24 max-w-4xl mx-auto">
+    <div className="text-center">
+      <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 dark:text-zinc-50 tracking-tight">
+        Fiscal.ai API
+      </h1>
+      
+      <div className="max-w-2xl mx-auto px-4 mt-6 text-xl text-gray-600 dark:text-zinc-400">
+        Real-time financial data API with <span className="text-green-600 dark:text-green-400 font-semibold">minutes-fresh updates</span> from SEC filings
+      </div>
+
+      <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+        <Card
+          title="Start Free Trial"
+          href="/guides/free-trial"
+          horizontal
+          icon="rocket"
+          cta="Get 250 free API calls"
+        />
+        <Card
+          title="View API Reference"
+          href="#api-reference"
+          horizontal
+          icon="terminal"
+          cta="Explore endpoints"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+## Why Choose Fiscal.ai?
+
+<Columns cols={2}>
+  <Card
+    title="⚡ Real-time Updates"
+    icon="clock"
+  >
+    Data updated within **minutes** of public disclosure. Never miss critical financial information.
+  </Card>
+  
+  <Card
+    title="🔍 Dual Data Format"
+    icon="layers"
+  >
+    Get both **as-reported** (raw company data) and **standardized** (normalized for comparison) formats in one API.
+  </Card>
+  
+  <Card
+    title="📊 Comprehensive Coverage"
+    icon="chart-bar"
+  >
+    Financial statements, ratios, market data, SEC filings, and corporate actions - all in one place.
+  </Card>
+  
+  <Card
+    title="👩‍💻 Developer-friendly"
+    icon="code"
+  >
+    RESTful API with comprehensive docs, code examples, and multiple authentication methods.
+  </Card>
+</Columns>
+
+## Quick Start
+
+<Columns cols={3}>
+  <Card
+    title="1. Get Your API Key"
+    icon="key"
+    href="/guides/getting-started"
+  >
+    Create your free account and generate an API key in minutes.
+  </Card>
+  
+  <Card
+    title="2. Try Free Trial"
+    icon="gift"
+    href="/guides/free-trial"
+  >
+    **250 API calls per day** with access to major companies like MSFT, AAPL, TSLA.
+  </Card>
+  
+  <Card
+    title="3. Make Your First Call"
+    icon="play"
+    href="#quick-examples"
+  >
+    Start with company profiles, then explore financial data and ratios.
+  </Card>
+</Columns>
+
+## Data Categories
+
+<Columns cols={2}>
+  <Card
+    title="Company Information"
+    icon="building-office"
+    href="#api-reference"
+  >
+    Company profiles, sector classification, exchange info, and available datasets.
+  </Card>
+  
+  <Card
+    title="Financial Statements"
+    icon="document-text"
+    href="#api-reference"
+  >
+    Income statements, balance sheets, cash flow - both as-reported and standardized formats.
+  </Card>
+  
+  <Card
+    title="Financial Ratios"
+    icon="calculator"
+    href="/resources/ratios"
+  >
+    **65+ financial ratios** calculated automatically with historical time series data.
+  </Card>
+  
+  <Card
+    title="Market Data"
+    icon="trending-up"
+  >
+    Stock prices, market cap, shares outstanding, and corporate actions.
+  </Card>
+  
+  <Card
+    title="SEC Filings"
+    icon="folder-open"
+  >
+    Direct access to original 10-K, 10-Q filings with source document links.
+  </Card>
+  
+  <Card
+    title="Real-time Updates"
+    icon="refresh"
+  >
+    Webhook notifications and MCP integrations for automated workflows.
+  </Card>
+</Columns>
+
+## Quick Examples {#quick-examples}
+
+Get started with these common API calls:
+
+### Get Company Profile
+```bash
+curl "https://api.fiscal.ai/v1/company/profile?companyKey=NASDAQ_MSFT&apiKey=YOUR_API_KEY"
+```
+
+### Get Latest Financial Ratios
+```bash
+curl "https://api.fiscal.ai/v1/company/ratios?companyKey=NASDAQ_MSFT&apiKey=YOUR_API_KEY"
+```
+
+### Get Quarterly Earnings (Standardized)
+```bash
+curl "https://api.fiscal.ai/v1/company/financials/income-statement/standardized?companyKey=NASDAQ_MSFT&periodType=quarterly&apiKey=YOUR_API_KEY"
+```
+
+<Info>
+Replace `YOUR_API_KEY` with your actual API key from the [getting started guide](/guides/getting-started).
+</Info>
+
+## Understanding Our Data
+
+<Columns cols={2}>
+  <Card
+    title="As-Reported Data"
+    icon="document"
+  >
+    Raw financial data exactly as companies filed with the SEC. Company-specific line items with direct filing sources.
+  </Card>
+  
+  <Card
+    title="Standardized Data"
+    icon="scale"
+  >
+    Normalized data mapped to common schema for easy comparison, **plus** the underlying as-reported mapping.
+  </Card>
+</Columns>
+
+**Key Insight**: Standardized data isn't separate from as-reported data—it's as-reported data **plus the mapping layer**. You see both the final number AND how it was calculated.
+
+## Developer Resources
+
+<Columns cols={3}>
+  <Card
+    title="Webhooks"
+    icon="bell"
+    href="/guides/webhooks"
+  >
+    Get real-time notifications when new financial data is available.
+  </Card>
+  
+  <Card
+    title="MCP Integration"
+    icon="puzzle-piece"
+    href="/guides/mcp-integration"
+  >
+    Connect with AI tools and automation platforms seamlessly.
+  </Card>
+  
+  <Card
+    title="API Reference"
+    icon="book-open"
+    href="#api-reference"
+  >
+    Complete endpoint documentation with interactive examples.
+  </Card>
+</Columns>
+
+## Need More?
 
 <Card
-  title="Start here"
-  icon="rocket"
-  href="/quickstart"
+  title="Contact Sales for Enterprise Access"
+  icon="phone"
+  href="https://fiscal.ai/contact-sales/"
   horizontal
 >
-  Follow our three step quickstart guide.
+  Higher rate limits, full company coverage, priority support, and custom integrations.
 </Card>
 
-## Make it yours
+---
 
-Design a docs site that looks great and empowers your users.
-
-<Columns cols={2}>
-  <Card
-    title="Edit locally"
-    icon="pen-to-square"
-    href="/development"
-  >
-    Edit your docs locally and preview them in real time.
-  </Card>
-  <Card
-    title="Customize your site"
-    icon="palette"
-    href="/essentials/settings"
-  >
-    Customize the design and colors of your site to match your brand.
-  </Card>
-    <Card
-    title="Set up navigation"
-    icon="map"
-    href="/essentials/navigation"
-  >
-    Organize your docs to help users find what they need and succeed with your product.
-  </Card>
-  <Card
-    title="API documentation"
-    icon="terminal"
-    href="/api-reference/introduction"
-  >
-    Auto-generate API documentation from OpenAPI specifications.
-  </Card>
-</Columns>
-
-## Create beautiful pages
-
-Everything you need to create world-class documentation.
-
-<Columns cols={2}>
-  <Card
-    title="Write with MDX"
-    icon="pen-fancy"
-    href="/essentials/markdown"
-  >
-    Use MDX to style your docs pages.
-  </Card>
-  <Card
-    title="Code samples"
-    icon="code"
-    href="/essentials/code"
-  >
-    Add sample code to demonstrate how to use your product.
-  </Card>
-  <Card
-    title="Images"
-    icon="image"
-    href="/essentials/images"
-  >
-    Display images and other media.
-  </Card>
-  <Card
-    title="Reusable snippets"
-    icon="recycle"
-    href="/essentials/reusable-snippets"
-  >
-    Write once and reuse across your docs.
-  </Card>
-</Columns>
-
-## Need inspiration?
-
-<Card
-  title="See complete examples"
-  icon="stars"
-  href="https://mintlify.com/customers"
->
-  Browse our showcase of exceptional documentation sites.
-</Card>
+<div className="text-center text-sm text-gray-500 dark:text-zinc-500">
+  Ready to get started? Check out our [detailed API introduction](/introduction) or jump into the [getting started guide](/guides/getting-started).
+</div>
