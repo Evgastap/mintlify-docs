@@ -2,15 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "version": "1.0.0",
-    "title": "Fiscal.ai API",
-    "description": "Comprehensive financial data API for public companies including financial statements, ratios, stock prices, and corporate filings."
+    "title": "OpenAPI"
   },
-  "servers": [
-    {
-      "url": "https://api.fiscal.ai",
-      "description": "Production server"
-    }
-  ],
   "components": {
     "securitySchemes": {
       "ApiKeyAuth": {
@@ -24,38 +17,29 @@
         "name": "X-Api-Key"
       }
     },
-    "schemas": {
-      "Error": {
-        "type": "object",
-        "properties": {
-          "errors": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-              },
-              "required": ["message"]
-            }
-          }
-        },
-        "required": ["errors"]
-      }
-    }
+    "schemas": {},
+    "parameters": {}
   },
   "paths": {
     "/v1/companies-list": {
       "get": {
-        "tags": ["Companies"],
+        "tags": [
+          "Companies"
+        ],
         "summary": "Get a list of all companies",
         "description": "Lists all companies available in the dataset together with basic descriptors and the types of data available for each company.",
-        "security": [{"ApiKeyAuth": []}],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
         "operationId": "get_CompaniesList",
         "parameters": [
           {
-            "schema": {"type": "string", "description": "API Key (alternatively send via X-Api-Key header)"},
+            "schema": {
+              "type": "string",
+              "description": "API Key (alternatively send via X-Api-Key header)"
+            },
             "required": false,
             "description": "API Key (alternatively send via X-Api-Key header)",
             "name": "apiKey",
@@ -72,46 +56,269 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "name": {"type": "string", "example": "Visa Inc."},
-                      "ticker": {"type": "string", "example": "V"},
-                      "cik": {"type": "string", "example": "1403161"},
-                      "exchangeName": {"type": "string", "example": "New York Stock Exchange"},
-                      "exchangeSymbol": {"type": "string", "example": "NYSE"},
-                      "countryName": {"type": "string", "example": "United States"},
-                      "countryCode": {"type": "string", "example": "US"},
-                      "sector": {"type": "string", "example": "Financials"},
-                      "industryGroup": {"type": "string", "example": "Financial Services"},
-                      "industry": {"type": "string", "example": "Financial Services"},
-                      "subIndustry": {"type": "string", "example": "Transaction & Payment Processing Services"},
-                      "reportingTemplate": {"type": "string", "example": "Standard"},
-                      "dataAvailable": {"type": "array", "items": {"type": "string", "example": "financials"}},
-                      "cusip": {"type": "array", "items": {"type": "string", "example": "92826C839"}},
-                      "isin": {"type": "array", "items": {"type": "string", "example": "US92826C8394"}}
+                      "name": {
+                        "type": "string",
+                        "example": "Visa Inc."
+                      },
+                      "ticker": {
+                        "type": "string",
+                        "example": "V"
+                      },
+                      "cik": {
+                        "type": "string",
+                        "example": "1403161"
+                      },
+                      "exchangeName": {
+                        "type": "string",
+                        "example": "New York Stock Exchange"
+                      },
+                      "exchangeSymbol": {
+                        "type": "string",
+                        "example": "NYSE"
+                      },
+                      "countryName": {
+                        "type": "string",
+                        "example": "United States"
+                      },
+                      "countryCode": {
+                        "type": "string",
+                        "example": "US"
+                      },
+                      "sector": {
+                        "type": "string",
+                        "example": "Financials"
+                      },
+                      "industryGroup": {
+                        "type": "string",
+                        "example": "Financial Services"
+                      },
+                      "industry": {
+                        "type": "string",
+                        "example": "Financial Services"
+                      },
+                      "subIndustry": {
+                        "type": "string",
+                        "example": "Transaction & Payment Processing Services"
+                      },
+                      "reportingTemplate": {
+                        "type": "string",
+                        "example": "Standard"
+                      },
+                      "dataAvailable": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "example": "financials"
+                        }
+                      },
+                      "cusip": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "example": "92826C839"
+                        }
+                      },
+                      "isin": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "example": "US92826C8394"
+                        }
+                      }
                     },
-                    "required": ["name", "ticker", "exchangeName", "exchangeSymbol", "countryName", "countryCode", "sector", "industryGroup", "industry", "subIndustry", "reportingTemplate", "dataAvailable", "cusip", "isin"]
+                    "required": [
+                      "name",
+                      "ticker",
+                      "exchangeName",
+                      "exchangeSymbol",
+                      "countryName",
+                      "countryCode",
+                      "sector",
+                      "industryGroup",
+                      "industry",
+                      "subIndustry",
+                      "reportingTemplate",
+                      "dataAvailable",
+                      "cusip",
+                      "isin"
+                    ]
                   }
                 }
               }
             }
           },
-          "400": {"description": "Bad Request", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
-          "403": {"description": "Forbidden", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
-          "404": {"description": "Not Found", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}}
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Missing required parameters: either Company Key, CUSIP, ISIN, or Ticker + Exchange"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Invalid api key"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Not Found"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          }
         }
       }
     },
     "/v1/company/profile": {
       "get": {
-        "tags": ["Companies"],
+        "tags": [
+          "Companies"
+        ],
         "summary": "Get profile for a single company",
         "description": "Retrieves a detailed company profile including sector, industry, descriptions and lists the datasets currently available under the Fiscal.ai system.",
-        "security": [{"ApiKeyAuth": []}],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
         "operationId": "get_CompanyProfile",
         "parameters": [
-          {"schema": {"type": "string"}, "required": false, "name": "apiKey", "in": "query"},
-          {"schema": {"type": "string", "example": "MSFT"}, "required": false, "name": "ticker", "in": "query"},
-          {"schema": {"type": "string", "example": "NASDAQ"}, "required": false, "name": "exchange", "in": "query"},
-          {"schema": {"type": "string", "example": "NASDAQ_MSFT"}, "required": false, "name": "companyKey", "in": "query"}
+          {
+            "schema": {
+              "type": "string",
+              "description": "API Key (alternatively send via X-Api-Key header)"
+            },
+            "required": false,
+            "description": "API Key (alternatively send via X-Api-Key header)",
+            "name": "apiKey",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company ticker (use with exchange, or alone to auto-detect exchange)",
+              "example": "MSFT"
+            },
+            "required": false,
+            "description": "Company ticker (use with exchange, or alone to auto-detect exchange)",
+            "name": "ticker",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company exchange (use with ticker)",
+              "example": "NASDAQ"
+            },
+            "required": false,
+            "description": "Company exchange (use with ticker)",
+            "name": "exchange",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company key (alternative to ticker & exchange)",
+              "example": "NASDAQ_MSFT"
+            },
+            "required": false,
+            "description": "Company key (alternative to ticker & exchange)",
+            "name": "companyKey",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company CUSIP",
+              "example": "594918104"
+            },
+            "required": false,
+            "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company CUSIP",
+            "name": "cusip",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company ISIN",
+              "example": "US5949181045"
+            },
+            "required": false,
+            "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company ISIN",
+            "name": "isin",
+            "in": "query"
+          }
         ],
         "responses": {
           "200": {
@@ -121,42 +328,2171 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "name": {"type": "string"},
-                    "ticker": {"type": "string"},
-                    "exchangeName": {"type": "string"},
-                    "exchangeSymbol": {"type": "string"},
-                    "countryName": {"type": "string"},
-                    "countryCode": {"type": "string"},
-                    "sector": {"type": "string"},
-                    "industryGroup": {"type": "string"},
-                    "industry": {"type": "string"},
-                    "subIndustry": {"type": "string"},
-                    "reportingTemplate": {"type": "string"},
-                    "description": {"type": "string"},
-                    "shortDescription": {"type": "string"}
+                    "name": {
+                      "type": "string",
+                      "example": "Visa Inc."
+                    },
+                    "ticker": {
+                      "type": "string",
+                      "example": "V"
+                    },
+                    "cik": {
+                      "type": "string",
+                      "example": "1403161"
+                    },
+                    "exchangeName": {
+                      "type": "string",
+                      "example": "New York Stock Exchange"
+                    },
+                    "exchangeSymbol": {
+                      "type": "string",
+                      "example": "NYSE"
+                    },
+                    "countryName": {
+                      "type": "string",
+                      "example": "United States"
+                    },
+                    "countryCode": {
+                      "type": "string",
+                      "example": "US"
+                    },
+                    "sector": {
+                      "type": "string",
+                      "example": "Financials"
+                    },
+                    "industryGroup": {
+                      "type": "string",
+                      "example": "Financial Services"
+                    },
+                    "industry": {
+                      "type": "string",
+                      "example": "Financial Services"
+                    },
+                    "subIndustry": {
+                      "type": "string",
+                      "example": "Transaction & Payment Processing Services"
+                    },
+                    "reportingTemplate": {
+                      "type": "string",
+                      "example": "Standard"
+                    },
+                    "reportingCurrency": {
+                      "type": "string",
+                      "example": "USD"
+                    },
+                    "dataAvailable": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "financials"
+                      }
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "Visa Inc. is a global payments technology company that facilitates electronic fund transfers among consumers, merchants, financial institutions, and governments in over 200 countries and territories..."
+                    },
+                    "shortDescription": {
+                      "type": "string",
+                      "example": "Visa Inc. is a global payments technology company based in Foster City, California, that processes electronic transactions in over 200 countries..."
+                    },
+                    "cusip": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "92826C839"
+                      }
+                    },
+                    "isin": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "US92826C8394"
+                      }
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "ticker",
+                    "exchangeName",
+                    "exchangeSymbol",
+                    "countryName",
+                    "countryCode",
+                    "sector",
+                    "industryGroup",
+                    "industry",
+                    "subIndustry",
+                    "reportingTemplate",
+                    "reportingCurrency",
+                    "dataAvailable",
+                    "description",
+                    "shortDescription",
+                    "cusip",
+                    "isin"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Missing required parameters: either Company Key, CUSIP, ISIN, or Ticker + Exchange"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Invalid api key"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Not Found"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/company/financials/{statementType}/as-reported": {
+      "get": {
+        "tags": [
+          "Financials"
+        ],
+        "summary": "Get as-reported financials for a company",
+        "description": "Returns raw financial statement line items exactly as disclosed by the company, including source document links for traceability.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "operationId": "get_AsReported",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "income-statement",
+                "balance-sheet",
+                "cash-flow-statement"
+              ],
+              "description": "Financial statement category",
+              "example": "income-statement"
+            },
+            "required": true,
+            "description": "Financial statement category",
+            "name": "statementType",
+            "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "API Key (alternatively send via X-Api-Key header)"
+            },
+            "required": false,
+            "description": "API Key (alternatively send via X-Api-Key header)",
+            "name": "apiKey",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company ticker (use with exchange, or alone to auto-detect exchange)",
+              "example": "MSFT"
+            },
+            "required": false,
+            "description": "Company ticker (use with exchange, or alone to auto-detect exchange)",
+            "name": "ticker",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company exchange (use with ticker)",
+              "example": "NASDAQ"
+            },
+            "required": false,
+            "description": "Company exchange (use with ticker)",
+            "name": "exchange",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company key (alternative to ticker & exchange)",
+              "example": "NASDAQ_MSFT"
+            },
+            "required": false,
+            "description": "Company key (alternative to ticker & exchange)",
+            "name": "companyKey",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company CUSIP",
+              "example": "594918104"
+            },
+            "required": false,
+            "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company CUSIP",
+            "name": "cusip",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company ISIN",
+              "example": "US5949181045"
+            },
+            "required": false,
+            "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company ISIN",
+            "name": "isin",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "annual",
+              "description": "Optional period filter as a comma-separated list of: annual, quarterly, semi-annual, ltm, ytd, latest. Defaults to 'annual'.",
+              "example": "annual,quarterly"
+            },
+            "required": false,
+            "description": "Optional period filter as a comma-separated list of: annual, quarterly, semi-annual, ltm, ytd, latest. Defaults to 'annual'.",
+            "name": "periodType",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "As-reported financial data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "metrics": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "asReportedMetricId": {
+                            "type": "string",
+                            "example": "1_IS_65961"
+                          },
+                          "metricName": {
+                            "type": "string",
+                            "example": "Products"
+                          },
+                          "headers": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "example": "Net Sales"
+                            }
+                          },
+                          "metricFormat": {
+                            "type": "string",
+                            "example": "number"
+                          },
+                          "isPointInTime": {
+                            "type": "boolean"
+                          },
+                          "isCurrency": {
+                            "type": "boolean",
+                            "example": true
+                          },
+                          "isPerShare": {
+                            "type": "boolean"
+                          },
+                          "isKeyMetric": {
+                            "type": "boolean"
+                          }
+                        },
+                        "required": [
+                          "asReportedMetricId",
+                          "metricName",
+                          "headers",
+                          "metricFormat",
+                          "isPointInTime",
+                          "isCurrency",
+                          "isPerShare",
+                          "isKeyMetric"
+                        ]
+                      }
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "periodId": {
+                            "type": "string",
+                            "example": "3_Quarterly_2025-04-27"
+                          },
+                          "periodType": {
+                            "type": "string",
+                            "enum": [
+                              "Annual",
+                              "Quarterly",
+                              "Semi-Annual",
+                              "LTM",
+                              "YTD"
+                            ],
+                            "example": "Quarterly"
+                          },
+                          "reportDate": {
+                            "type": "string",
+                            "example": "2025-04-27"
+                          },
+                          "periodDuration": {
+                            "type": "string",
+                            "example": "3 months"
+                          },
+                          "calendarYear": {
+                            "type": "number",
+                            "example": 2025
+                          },
+                          "calendarQuarter": {
+                            "type": "number",
+                            "example": 2
+                          },
+                          "fiscalYear": {
+                            "type": "number",
+                            "example": 2026
+                          },
+                          "fiscalQuarter": {
+                            "type": "number",
+                            "example": 1
+                          },
+                          "metricsValues": {
+                            "type": "object",
+                            "properties": {
+                              "1_IS_65961": {
+                                "type": "object",
+                                "properties": {
+                                  "value": {
+                                    "type": "number",
+                                    "example": 294866000000
+                                  },
+                                  "unit": {
+                                    "type": "string",
+                                    "example": "M"
+                                  },
+                                  "currency": {
+                                    "type": "string",
+                                    "example": "USD"
+                                  },
+                                  "sources": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "document": {
+                                          "type": "string",
+                                          "example": "https://api.fiscal.ai/v1/filing/0000320193-24-000123/pdf?ticker=AAPL&exchange=NASDAQ"
+                                        },
+                                        "image": {
+                                          "type": "string",
+                                          "example": "https://api.fiscal.ai/v1/filing/0000320193-24-000123/page/32/image?ticker=AAPL&exchange=NASDAQ"
+                                        },
+                                        "pageNumber": {
+                                          "type": "number",
+                                          "example": 32
+                                        }
+                                      },
+                                      "required": [
+                                        "document"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "value",
+                                  "unit",
+                                  "currency",
+                                  "sources"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "1_IS_65961"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "periodId",
+                          "periodType",
+                          "reportDate",
+                          "periodDuration",
+                          "calendarYear",
+                          "calendarQuarter",
+                          "metricsValues"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "metrics",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Missing required parameters: either Company Key, CUSIP, ISIN, or Ticker + Exchange"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Invalid api key"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Not Found"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/standardized-metrics-list/{templateType}/{statementType}": {
+      "get": {
+        "tags": [
+          "Standardized"
+        ],
+        "summary": "Get the list of all standardized metrics.",
+        "description": "Returns the list of all standardized metrics.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "operationId": "get_StandardizedMetricsList",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "standard",
+                "capital-markets",
+                "financials",
+                "insurance",
+                "utilities",
+                "real-estate"
+              ],
+              "description": "Reporting template category",
+              "example": "standard"
+            },
+            "required": true,
+            "description": "Reporting template category",
+            "name": "templateType",
+            "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "income-statement",
+                "balance-sheet",
+                "cash-flow-statement"
+              ],
+              "description": "Financial statement category",
+              "example": "income-statement"
+            },
+            "required": true,
+            "description": "Financial statement category",
+            "name": "statementType",
+            "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "API Key (alternatively send via X-Api-Key header)"
+            },
+            "required": false,
+            "description": "API Key (alternatively send via X-Api-Key header)",
+            "name": "apiKey",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Standardized metrics list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reportingTemplate": {
+                      "type": "string",
+                      "enum": [
+                        "Standard",
+                        "Capital Markets",
+                        "Financials",
+                        "Insurance",
+                        "Utilities",
+                        "Real Estate"
+                      ],
+                      "example": "Standard"
+                    },
+                    "metrics": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "standardizedMetricId": {
+                            "type": "string",
+                            "example": "income_statement_total_revenues"
+                          },
+                          "metricName": {
+                            "type": "string",
+                            "example": "Total Revenues"
+                          },
+                          "metricFormat": {
+                            "type": "string",
+                            "example": "number"
+                          },
+                          "isPointInTime": {
+                            "type": "boolean"
+                          },
+                          "isCurrency": {
+                            "type": "boolean",
+                            "example": true
+                          },
+                          "isTotal": {
+                            "type": "boolean"
+                          },
+                          "headers": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "example": "Income"
+                            }
+                          }
+                        },
+                        "required": [
+                          "standardizedMetricId",
+                          "metricName",
+                          "metricFormat",
+                          "isPointInTime",
+                          "isCurrency",
+                          "isTotal",
+                          "headers"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "reportingTemplate",
+                    "metrics"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Missing required parameters: either Company Key, CUSIP, ISIN, or Ticker + Exchange"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Invalid api key"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Not Found"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/company/financials/{statementType}/standardized": {
+      "get": {
+        "tags": [
+          "Financials"
+        ],
+        "summary": "Get standardized financials for a company",
+        "description": "Returns standardized financial statements where line items are mapped to a common schema, enabling apples-to-apples comparison across companies.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "operationId": "get_Standardized",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "income-statement",
+                "balance-sheet",
+                "cash-flow-statement"
+              ],
+              "description": "Financial statement category",
+              "example": "income-statement"
+            },
+            "required": true,
+            "description": "Financial statement category",
+            "name": "statementType",
+            "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "API Key (alternatively send via X-Api-Key header)"
+            },
+            "required": false,
+            "description": "API Key (alternatively send via X-Api-Key header)",
+            "name": "apiKey",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company ticker (use with exchange, or alone to auto-detect exchange)",
+              "example": "MSFT"
+            },
+            "required": false,
+            "description": "Company ticker (use with exchange, or alone to auto-detect exchange)",
+            "name": "ticker",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company exchange (use with ticker)",
+              "example": "NASDAQ"
+            },
+            "required": false,
+            "description": "Company exchange (use with ticker)",
+            "name": "exchange",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company key (alternative to ticker & exchange)",
+              "example": "NASDAQ_MSFT"
+            },
+            "required": false,
+            "description": "Company key (alternative to ticker & exchange)",
+            "name": "companyKey",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company CUSIP",
+              "example": "594918104"
+            },
+            "required": false,
+            "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company CUSIP",
+            "name": "cusip",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company ISIN",
+              "example": "US5949181045"
+            },
+            "required": false,
+            "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company ISIN",
+            "name": "isin",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "annual",
+              "description": "Optional period filter as a comma-separated list of: annual, quarterly, semi-annual, ltm, ytd, latest. Defaults to 'annual'.",
+              "example": "annual,quarterly"
+            },
+            "required": false,
+            "description": "Optional period filter as a comma-separated list of: annual, quarterly, semi-annual, ltm, ytd, latest. Defaults to 'annual'.",
+            "name": "periodType",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Standardized financial data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reportingTemplate": {
+                      "type": "string",
+                      "example": "Standard"
+                    },
+                    "metrics": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "standardizedMetricId": {
+                            "type": "string",
+                            "example": "income_statement_total_revenues"
+                          },
+                          "metricName": {
+                            "type": "string",
+                            "example": "Total Revenues"
+                          },
+                          "metricFormat": {
+                            "type": "string",
+                            "example": "number"
+                          },
+                          "isPointInTime": {
+                            "type": "boolean"
+                          },
+                          "isCurrency": {
+                            "type": "boolean",
+                            "example": true
+                          },
+                          "isTotal": {
+                            "type": "boolean"
+                          },
+                          "headers": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "example": "Revenues"
+                            }
+                          },
+                          "asReportedMetrics": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "asReportedMetricId": {
+                                  "type": "string",
+                                  "example": "1_IS_65961"
+                                },
+                                "metricName": {
+                                  "type": "string",
+                                  "example": "Products"
+                                },
+                                "headers": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string",
+                                    "example": "Net Sales"
+                                  }
+                                },
+                                "metricFormat": {
+                                  "type": "string",
+                                  "example": "number"
+                                },
+                                "isPointInTime": {
+                                  "type": "boolean"
+                                },
+                                "isCurrency": {
+                                  "type": "boolean",
+                                  "example": true
+                                },
+                                "isPerShare": {
+                                  "type": "boolean"
+                                },
+                                "isKeyMetric": {
+                                  "type": "boolean"
+                                },
+                                "operation": {
+                                  "type": "string",
+                                  "example": "+"
+                                }
+                              },
+                              "required": [
+                                "asReportedMetricId",
+                                "metricName",
+                                "headers",
+                                "metricFormat",
+                                "isPointInTime",
+                                "isCurrency",
+                                "isPerShare",
+                                "isKeyMetric",
+                                "operation"
+                              ]
+                            }
+                          }
+                        },
+                        "required": [
+                          "standardizedMetricId",
+                          "metricName",
+                          "metricFormat",
+                          "isPointInTime",
+                          "isCurrency",
+                          "isTotal",
+                          "headers",
+                          "asReportedMetrics"
+                        ]
+                      }
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "periodId": {
+                            "type": "string",
+                            "example": "3_Quarterly_2025-04-27"
+                          },
+                          "periodType": {
+                            "type": "string",
+                            "enum": [
+                              "Annual",
+                              "Quarterly",
+                              "Semi-Annual",
+                              "LTM",
+                              "YTD"
+                            ],
+                            "example": "Quarterly"
+                          },
+                          "reportDate": {
+                            "type": "string",
+                            "example": "2025-04-27"
+                          },
+                          "periodDuration": {
+                            "type": "string",
+                            "example": "3 months"
+                          },
+                          "calendarYear": {
+                            "type": "number",
+                            "example": 2025
+                          },
+                          "calendarQuarter": {
+                            "type": "number",
+                            "example": 2
+                          },
+                          "fiscalYear": {
+                            "type": "number",
+                            "example": 2026
+                          },
+                          "fiscalQuarter": {
+                            "type": "number",
+                            "example": 1
+                          },
+                          "metricsValues": {
+                            "type": "object",
+                            "properties": {
+                              "income_statement_total_revenues": {
+                                "type": "object",
+                                "properties": {
+                                  "value": {
+                                    "type": "number",
+                                    "example": 391035000000
+                                  },
+                                  "asReportedValues": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "asReportedMetricId": {
+                                          "type": "string",
+                                          "example": "1_IS_65961"
+                                        },
+                                        "metricName": {
+                                          "type": "string",
+                                          "example": "Products"
+                                        },
+                                        "headers": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string",
+                                            "example": "Net Sales"
+                                          }
+                                        },
+                                        "operation": {
+                                          "type": "string",
+                                          "example": "+"
+                                        },
+                                        "value": {
+                                          "type": "number",
+                                          "example": 294866000000
+                                        },
+                                        "unit": {
+                                          "type": "string",
+                                          "example": "M"
+                                        },
+                                        "currency": {
+                                          "type": "string",
+                                          "example": "USD"
+                                        },
+                                        "sources": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "properties": {
+                                              "document": {
+                                                "type": "string",
+                                                "example": "https://api.fiscal.ai/v1/filing/0000320193-24-000123/pdf?ticker=AAPL&exchange=NASDAQ"
+                                              },
+                                              "image": {
+                                                "type": "string",
+                                                "example": "https://api.fiscal.ai/v1/filing/0000320193-24-000123/page/32/image?ticker=AAPL&exchange=NASDAQ"
+                                              },
+                                              "pageNumber": {
+                                                "type": "number",
+                                                "example": 32
+                                              }
+                                            },
+                                            "required": [
+                                              "document"
+                                            ]
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "asReportedMetricId",
+                                        "metricName",
+                                        "headers",
+                                        "operation",
+                                        "value",
+                                        "unit",
+                                        "currency",
+                                        "sources"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "value",
+                                  "asReportedValues"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "income_statement_total_revenues"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "periodId",
+                          "periodType",
+                          "reportDate",
+                          "periodDuration",
+                          "calendarYear",
+                          "calendarQuarter",
+                          "metricsValues"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "reportingTemplate",
+                    "metrics",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Missing required parameters: either Company Key, CUSIP, ISIN, or Ticker + Exchange"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Invalid api key"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Not Found"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/ratios-list": {
+      "get": {
+        "tags": [
+          "Ratios"
+        ],
+        "summary": "Get the list of all ratios.",
+        "description": "Returns the list of all ratios.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "operationId": "get_RatiosList",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "description": "API Key (alternatively send via X-Api-Key header)"
+            },
+            "required": false,
+            "description": "API Key (alternatively send via X-Api-Key header)",
+            "name": "apiKey",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ratios list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "ratioId": {
+                        "type": "string",
+                        "example": "price_to_earnings"
+                      },
+                      "metricName": {
+                        "type": "string",
+                        "example": "Price to Earnings"
+                      },
+                      "category": {
+                        "type": "string",
+                        "example": "Valuation"
+                      },
+                      "isCurrency": {
+                        "type": "boolean"
+                      },
+                      "metricFormat": {
+                        "type": "string",
+                        "example": "ratio"
+                      },
+                      "hasDailyData": {
+                        "type": "boolean",
+                        "example": true
+                      }
+                    },
+                    "required": [
+                      "ratioId",
+                      "metricName",
+                      "category",
+                      "isCurrency",
+                      "metricFormat",
+                      "hasDailyData"
+                    ]
                   }
                 }
               }
             }
           },
-          "400": {"description": "Bad Request", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
-          "403": {"description": "Forbidden", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
-          "404": {"description": "Not Found", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}}
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Missing required parameters: either Company Key, CUSIP, ISIN, or Ticker + Exchange"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Invalid api key"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Not Found"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/company/ratios": {
+      "get": {
+        "tags": [
+          "Ratios"
+        ],
+        "summary": "Get all ratios time series for a company",
+        "description": "Calculates and returns all supported financial ratios for the specified company across the selected period types. Where applicable, calculated intermediate metrics are omitted from the response unless diagnostics are requested.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "operationId": "get_CompanyRatios",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "description": "API Key (alternatively send via X-Api-Key header)"
+            },
+            "required": false,
+            "description": "API Key (alternatively send via X-Api-Key header)",
+            "name": "apiKey",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company ticker (use with exchange, or alone to auto-detect exchange)",
+              "example": "MSFT"
+            },
+            "required": false,
+            "description": "Company ticker (use with exchange, or alone to auto-detect exchange)",
+            "name": "ticker",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company exchange (use with ticker)",
+              "example": "NASDAQ"
+            },
+            "required": false,
+            "description": "Company exchange (use with ticker)",
+            "name": "exchange",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company key (alternative to ticker & exchange)",
+              "example": "NASDAQ_MSFT"
+            },
+            "required": false,
+            "description": "Company key (alternative to ticker & exchange)",
+            "name": "companyKey",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company CUSIP",
+              "example": "594918104"
+            },
+            "required": false,
+            "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company CUSIP",
+            "name": "cusip",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company ISIN",
+              "example": "US5949181045"
+            },
+            "required": false,
+            "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company ISIN",
+            "name": "isin",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "annual",
+              "description": "Optional period filter as a comma-separated list of: annual, quarterly, semi-annual, ltm, ytd, latest. Defaults to 'annual'.",
+              "example": "annual,quarterly"
+            },
+            "required": false,
+            "description": "Optional period filter as a comma-separated list of: annual, quarterly, semi-annual, ltm, ytd, latest. Defaults to 'annual'.",
+            "name": "periodType",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "description": "Include diagnostics in the response"
+            },
+            "required": false,
+            "description": "Include diagnostics in the response",
+            "name": "include_diagnostics",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Return only these ratio IDs. Can be provided multiple times or as a comma-separated list.",
+              "example": "ratio_price_to_earnings,ratio_price_to_sales"
+            },
+            "required": false,
+            "description": "Return only these ratio IDs. Can be provided multiple times or as a comma-separated list.",
+            "name": "ratioId",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All ratios time series",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "metrics": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "ratioId": {
+                            "type": "string",
+                            "example": "price_to_earnings"
+                          },
+                          "metricName": {
+                            "type": "string",
+                            "example": "Price to Earnings"
+                          },
+                          "category": {
+                            "type": "string",
+                            "example": "Valuation"
+                          },
+                          "isCurrency": {
+                            "type": "boolean"
+                          },
+                          "metricFormat": {
+                            "type": "string",
+                            "example": "ratio"
+                          },
+                          "hasDailyData": {
+                            "type": "boolean",
+                            "example": true
+                          }
+                        },
+                        "required": [
+                          "ratioId",
+                          "metricName",
+                          "category",
+                          "isCurrency",
+                          "metricFormat",
+                          "hasDailyData"
+                        ]
+                      }
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "periodId": {
+                            "type": "string",
+                            "example": "3_Quarterly_2025-04-27"
+                          },
+                          "periodType": {
+                            "type": "string",
+                            "enum": [
+                              "Annual",
+                              "Quarterly",
+                              "Semi-Annual",
+                              "LTM",
+                              "YTD"
+                            ],
+                            "example": "Quarterly"
+                          },
+                          "reportDate": {
+                            "type": "string",
+                            "example": "2025-04-27"
+                          },
+                          "periodDuration": {
+                            "type": "string",
+                            "example": "3 months"
+                          },
+                          "calendarYear": {
+                            "type": "number",
+                            "example": 2025
+                          },
+                          "calendarQuarter": {
+                            "type": "number",
+                            "example": 2
+                          },
+                          "fiscalYear": {
+                            "type": "number",
+                            "example": 2026
+                          },
+                          "fiscalQuarter": {
+                            "type": "number",
+                            "example": 1
+                          },
+                          "metricValues": {
+                            "type": "object",
+                            "properties": {
+                              "market_data_share_price": {
+                                "type": "number",
+                                "example": 108.73
+                              },
+                              "market_data_total_shares_outstanding": {
+                                "type": "number",
+                                "example": 24388000000
+                              },
+                              "calculated_market_cap": {
+                                "type": "number",
+                                "example": 2651707240000
+                              },
+                              "ratio_price_to_sales": {
+                                "type": "number",
+                                "example": 60.18
+                              },
+                              "ratio_price_to_earnings": {
+                                "type": "number",
+                                "example": 143.07
+                              }
+                            },
+                            "required": [
+                              "market_data_share_price",
+                              "market_data_total_shares_outstanding",
+                              "calculated_market_cap",
+                              "ratio_price_to_sales",
+                              "ratio_price_to_earnings"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "periodId",
+                          "periodType",
+                          "reportDate",
+                          "periodDuration",
+                          "calendarYear",
+                          "calendarQuarter",
+                          "metricValues"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "metrics",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Missing required parameters: either Company Key, CUSIP, ISIN, or Ticker + Exchange"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Invalid api key"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Not Found"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/company/ratios/daily/{ratioId}": {
+      "get": {
+        "tags": [
+          "Ratios"
+        ],
+        "summary": "Get daily ratio time-series for a company",
+        "description": "Returns a daily time-series for the specified ratio. The ratio is recomputed for each trading day using the closing share price for that day and the most recently reported fundamental inputs (e.g. EPS, shares outstanding) available as of that date.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "operationId": "get_CompanyDailyRatios",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "description": "ID of the ratio (e.g. ratio_price_to_earnings)",
+              "example": "ratio_price_to_earnings"
+            },
+            "required": true,
+            "description": "ID of the ratio (e.g. ratio_price_to_earnings)",
+            "name": "ratioId",
+            "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "API Key (alternatively send via X-Api-Key header)"
+            },
+            "required": false,
+            "description": "API Key (alternatively send via X-Api-Key header)",
+            "name": "apiKey",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company ticker (use with exchange, or alone to auto-detect exchange)",
+              "example": "MSFT"
+            },
+            "required": false,
+            "description": "Company ticker (use with exchange, or alone to auto-detect exchange)",
+            "name": "ticker",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company exchange (use with ticker)",
+              "example": "NASDAQ"
+            },
+            "required": false,
+            "description": "Company exchange (use with ticker)",
+            "name": "exchange",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company key (alternative to ticker & exchange)",
+              "example": "NASDAQ_MSFT"
+            },
+            "required": false,
+            "description": "Company key (alternative to ticker & exchange)",
+            "name": "companyKey",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company CUSIP",
+              "example": "594918104"
+            },
+            "required": false,
+            "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company CUSIP",
+            "name": "cusip",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company ISIN",
+              "example": "US5949181045"
+            },
+            "required": false,
+            "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company ISIN",
+            "name": "isin",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Daily ratio series",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "date": {
+                        "type": "string",
+                        "example": "2025-07-10"
+                      },
+                      "ratio": {
+                        "type": "number",
+                        "example": 25.34
+                      }
+                    },
+                    "required": [
+                      "date",
+                      "ratio"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Missing required parameters: either Company Key, CUSIP, ISIN, or Ticker + Exchange"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Invalid api key"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Not Found"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          }
         }
       }
     },
     "/v1/company/shares-outstanding": {
       "get": {
-        "tags": ["Shares Outstanding"],
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "_def": {
+                  "unknownKeys": "strip",
+                  "catchall": {
+                    "_def": {
+                      "typeName": "ZodNever"
+                    },
+                    "~standard": {
+                      "version": 1,
+                      "vendor": "zod"
+                    }
+                  },
+                  "typeName": "ZodObject"
+                },
+                "~standard": {
+                  "version": 1,
+                  "vendor": "zod"
+                },
+                "_cached": null
+              }
+            }
+          }
+        },
+        "403": {
+          "description": "Forbidden",
+          "content": {
+            "application/json": {
+              "schema": {
+                "_def": {
+                  "unknownKeys": "strip",
+                  "catchall": {
+                    "_def": {
+                      "typeName": "ZodNever"
+                    },
+                    "~standard": {
+                      "version": 1,
+                      "vendor": "zod"
+                    }
+                  },
+                  "typeName": "ZodObject"
+                },
+                "~standard": {
+                  "version": 1,
+                  "vendor": "zod"
+                },
+                "_cached": null
+              }
+            }
+          }
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/json": {
+              "schema": {
+                "_def": {
+                  "unknownKeys": "strip",
+                  "catchall": {
+                    "_def": {
+                      "typeName": "ZodNever"
+                    },
+                    "~standard": {
+                      "version": 1,
+                      "vendor": "zod"
+                    }
+                  },
+                  "typeName": "ZodObject"
+                },
+                "~standard": {
+                  "version": 1,
+                  "vendor": "zod"
+                },
+                "_cached": null
+              }
+            }
+          }
+        },
+        "tags": [
+          "Shares Outstanding"
+        ],
         "summary": "Get the latest shares outstanding for a company",
         "description": "Returns the total number of shares outstanding and detailed share-class breakdown as of the latest available filing for the company.",
-        "security": [{"ApiKeyAuth": []}],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
         "operationId": "get_CompanySharesOutstanding",
         "parameters": [
-          {"schema": {"type": "string"}, "required": false, "name": "apiKey", "in": "query"},
-          {"schema": {"type": "string", "example": "MSFT"}, "required": false, "name": "ticker", "in": "query"},
-          {"schema": {"type": "string", "example": "NASDAQ"}, "required": false, "name": "exchange", "in": "query"},
-          {"schema": {"type": "string", "example": "NASDAQ_MSFT"}, "required": false, "name": "companyKey", "in": "query"}
+          {
+            "schema": {
+              "type": "string",
+              "description": "API Key (alternatively send via X-Api-Key header)"
+            },
+            "required": false,
+            "description": "API Key (alternatively send via X-Api-Key header)",
+            "name": "apiKey",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company ticker (use with exchange, or alone to auto-detect exchange)",
+              "example": "MSFT"
+            },
+            "required": false,
+            "description": "Company ticker (use with exchange, or alone to auto-detect exchange)",
+            "name": "ticker",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company exchange (use with ticker)",
+              "example": "NASDAQ"
+            },
+            "required": false,
+            "description": "Company exchange (use with ticker)",
+            "name": "exchange",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company key (alternative to ticker & exchange)",
+              "example": "NASDAQ_MSFT"
+            },
+            "required": false,
+            "description": "Company key (alternative to ticker & exchange)",
+            "name": "companyKey",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company CUSIP",
+              "example": "594918104"
+            },
+            "required": false,
+            "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company CUSIP",
+            "name": "cusip",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company ISIN",
+              "example": "US5949181045"
+            },
+            "required": false,
+            "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company ISIN",
+            "name": "isin",
+            "in": "query"
+          }
         ],
         "responses": {
           "200": {
@@ -168,94 +2504,1687 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "date": {"type": "string", "example": "2025-04-28"},
-                      "totalSharesOutstanding": {"type": "number", "example": 908047623},
+                      "date": {
+                        "type": "string",
+                        "example": "2025-04-28"
+                      },
+                      "totalSharesOutstanding": {
+                        "type": "number",
+                        "example": 908047623
+                      },
                       "shareClasses": {
                         "type": "array",
                         "items": {
                           "type": "object",
                           "properties": {
-                            "shareClass": {"type": "string", "example": "Class A"},
-                            "isMainShareClass": {"type": "boolean", "example": true},
-                            "sharesOutstanding": {"type": "number", "example": 901263158},
-                            "conversionRate": {"type": "number", "example": 1},
-                            "sourceDocument": {"type": "string", "example": "https://api.fiscal.ai/v1/filing/0001141391-25-000090/pdf?ticker=MA&exchange=NYSE"}
+                            "shareClass": {
+                              "type": "string",
+                              "example": "Class A"
+                            },
+                            "isMainShareClass": {
+                              "type": "boolean",
+                              "example": true
+                            },
+                            "sharesOutstanding": {
+                              "type": "number",
+                              "example": 901263158
+                            },
+                            "conversionRate": {
+                              "type": "number",
+                              "example": 1
+                            },
+                            "sourceDocument": {
+                              "type": "string",
+                              "example": "https://api.fiscal.ai/v1/filing/0001141391-25-000090/pdf?ticker=MA&exchange=NYSE"
+                            }
                           },
-                          "required": ["shareClass", "isMainShareClass", "sharesOutstanding", "sourceDocument"]
+                          "required": [
+                            "shareClass",
+                            "isMainShareClass",
+                            "sharesOutstanding",
+                            "sourceDocument"
+                          ]
                         }
                       }
                     },
-                    "required": ["date", "totalSharesOutstanding", "shareClasses"]
+                    "required": [
+                      "date",
+                      "totalSharesOutstanding",
+                      "shareClasses"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/company/segments-and-kpis": {
+      "get": {
+        "tags": [
+          "Financials"
+        ],
+        "summary": "Get segments and KPIs for a company",
+        "description": "Returns segments and KPIs for a company.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "operationId": "get_SegmentsAndKpis",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "description": "API Key (alternatively send via X-Api-Key header)"
+            },
+            "required": false,
+            "description": "API Key (alternatively send via X-Api-Key header)",
+            "name": "apiKey",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company ticker (use with exchange, or alone to auto-detect exchange)",
+              "example": "MSFT"
+            },
+            "required": false,
+            "description": "Company ticker (use with exchange, or alone to auto-detect exchange)",
+            "name": "ticker",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company exchange (use with ticker)",
+              "example": "NASDAQ"
+            },
+            "required": false,
+            "description": "Company exchange (use with ticker)",
+            "name": "exchange",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company key (alternative to ticker & exchange)",
+              "example": "NASDAQ_MSFT"
+            },
+            "required": false,
+            "description": "Company key (alternative to ticker & exchange)",
+            "name": "companyKey",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company CUSIP",
+              "example": "594918104"
+            },
+            "required": false,
+            "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company CUSIP",
+            "name": "cusip",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company ISIN",
+              "example": "US5949181045"
+            },
+            "required": false,
+            "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company ISIN",
+            "name": "isin",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "annual",
+              "description": "Optional period filter as a comma-separated list of: annual, quarterly, semi-annual, ltm, ytd, latest. Defaults to 'annual'.",
+              "example": "annual,quarterly"
+            },
+            "required": false,
+            "description": "Optional period filter as a comma-separated list of: annual, quarterly, semi-annual, ltm, ytd, latest. Defaults to 'annual'.",
+            "name": "periodType",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Segments and KPIs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "metrics": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "metricId": {
+                            "type": "string",
+                            "example": "total_transaction_volume"
+                          },
+                          "metricName": {
+                            "type": "string",
+                            "example": "Total Transaction Volume"
+                          },
+                          "metricType": {
+                            "type": "string",
+                            "enum": [
+                              "Segment",
+                              "KPI"
+                            ],
+                            "example": "KPI"
+                          },
+                          "metricFormat": {
+                            "type": "string",
+                            "enum": [
+                              "number",
+                              "%",
+                              "ratio"
+                            ],
+                            "example": "number"
+                          },
+                          "isCurrency": {
+                            "type": "boolean",
+                            "example": true
+                          },
+                          "isImportant": {
+                            "type": "boolean",
+                            "example": true
+                          },
+                          "isDiscontinued": {
+                            "type": "object",
+                            "properties": {
+                              "example": {
+                                "type": "object",
+                                "properties": {
+                                  "Annual": {
+                                    "type": "boolean"
+                                  },
+                                  "Quarterly": {
+                                    "type": "boolean"
+                                  },
+                                  "LTM": {
+                                    "type": "boolean"
+                                  },
+                                  "Semi-Annual": {
+                                    "type": "boolean",
+                                    "example": true
+                                  }
+                                },
+                                "required": [
+                                  "Annual",
+                                  "Quarterly",
+                                  "LTM",
+                                  "Semi-Annual"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "example"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "metricId",
+                          "metricName",
+                          "metricType",
+                          "metricFormat",
+                          "isCurrency",
+                          "isImportant",
+                          "isDiscontinued"
+                        ]
+                      }
+                    },
+                    "segmentGroups": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string",
+                            "example": "Revenue"
+                          },
+                          "metrics": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "name": {
+                                  "type": "string",
+                                  "example": "Payment Network Revenue"
+                                },
+                                "isRollup": {
+                                  "type": "boolean"
+                                }
+                              },
+                              "required": [
+                                "name",
+                                "isRollup"
+                              ]
+                            }
+                          }
+                        },
+                        "required": [
+                          "title",
+                          "metrics"
+                        ]
+                      }
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "periodId": {
+                            "type": "string",
+                            "example": "3_Quarterly_2025-04-27"
+                          },
+                          "periodType": {
+                            "type": "string",
+                            "enum": [
+                              "Annual",
+                              "Quarterly",
+                              "Semi-Annual",
+                              "LTM",
+                              "YTD"
+                            ],
+                            "example": "Quarterly"
+                          },
+                          "reportDate": {
+                            "type": "string",
+                            "example": "2025-04-27"
+                          },
+                          "periodDuration": {
+                            "type": "string",
+                            "example": "3 months"
+                          },
+                          "calendarYear": {
+                            "type": "number",
+                            "example": 2025
+                          },
+                          "calendarQuarter": {
+                            "type": "number",
+                            "example": 2
+                          },
+                          "fiscalYear": {
+                            "type": "number",
+                            "example": 2026
+                          },
+                          "fiscalQuarter": {
+                            "type": "number",
+                            "example": 1
+                          },
+                          "metricsValues": {
+                            "type": "object",
+                            "properties": {
+                              "total_transaction_volume": {
+                                "type": "number",
+                                "example": 9884000000000
+                              }
+                            },
+                            "required": [
+                              "total_transaction_volume"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "periodId",
+                          "periodType",
+                          "reportDate",
+                          "periodDuration",
+                          "calendarYear",
+                          "calendarQuarter",
+                          "metricsValues"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "metrics",
+                    "segmentGroups",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Missing required parameters: either Company Key, CUSIP, ISIN, or Ticker + Exchange"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Invalid api key"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Not Found"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/company/stock-splits": {
+      "get": {
+        "tags": [
+          "Stock splits"
+        ],
+        "summary": "Get the stock splits for a company",
+        "description": "Provides all historical stock split and stock dividend events for the requested company, including split ratio and relevant dates.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "operationId": "get_CompanyStockSplits",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "description": "API Key (alternatively send via X-Api-Key header)"
+            },
+            "required": false,
+            "description": "API Key (alternatively send via X-Api-Key header)",
+            "name": "apiKey",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company ticker (use with exchange, or alone to auto-detect exchange)",
+              "example": "NVDA"
+            },
+            "required": false,
+            "description": "Company ticker (use with exchange, or alone to auto-detect exchange)",
+            "name": "ticker",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company exchange (use with ticker)",
+              "example": "NASDAQ"
+            },
+            "required": false,
+            "description": "Company exchange (use with ticker)",
+            "name": "exchange",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company key (alternative to ticker & exchange)",
+              "example": "NASDAQ_NVDA"
+            },
+            "required": false,
+            "description": "Company key (alternative to ticker & exchange)",
+            "name": "companyKey",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company CUSIP"
+            },
+            "required": false,
+            "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company CUSIP",
+            "name": "cusip",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company ISIN"
+            },
+            "required": false,
+            "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company ISIN",
+            "name": "isin",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Stock splits",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "announceDate": {
+                        "type": "string",
+                        "example": "2023-01-15"
+                      },
+                      "recordDate": {
+                        "type": "string",
+                        "example": "2023-02-01"
+                      },
+                      "exDate": {
+                        "type": "string",
+                        "example": "2023-02-05"
+                      },
+                      "payDate": {
+                        "type": "string",
+                        "example": "2023-02-10"
+                      },
+                      "splitType": {
+                        "type": "string",
+                        "enum": [
+                          "Stock Split",
+                          "Reverse Stock Split",
+                          "Stock Dividend"
+                        ],
+                        "example": "Stock Split"
+                      },
+                      "rate": {
+                        "type": "number",
+                        "example": 2
+                      }
+                    },
+                    "required": [
+                      "splitType",
+                      "rate"
+                    ]
                   }
                 }
               }
             }
           },
-          "403": {"description": "Forbidden", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
-          "404": {"description": "Not Found", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}}
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Missing required parameters: either Company Key, CUSIP, ISIN, or Ticker + Exchange"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Invalid api key"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Not Found"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/company/stock-prices": {
+      "get": {
+        "tags": [
+          "Stock prices"
+        ],
+        "summary": "Get the stock prices for a company",
+        "description": "Returns the daily closing share price series for the specified company. Prices are split-adjusted and expressed in the company reporting currency where applicable.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "operationId": "get_CompanyStockPrices",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "description": "API Key (alternatively send via X-Api-Key header)"
+            },
+            "required": false,
+            "description": "API Key (alternatively send via X-Api-Key header)",
+            "name": "apiKey",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company ticker (use with exchange, or alone to auto-detect exchange)",
+              "example": "MSFT"
+            },
+            "required": false,
+            "description": "Company ticker (use with exchange, or alone to auto-detect exchange)",
+            "name": "ticker",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company exchange (use with ticker)",
+              "example": "NASDAQ"
+            },
+            "required": false,
+            "description": "Company exchange (use with ticker)",
+            "name": "exchange",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company key (alternative to ticker & exchange)",
+              "example": "NASDAQ_MSFT"
+            },
+            "required": false,
+            "description": "Company key (alternative to ticker & exchange)",
+            "name": "companyKey",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company CUSIP",
+              "example": "594918104"
+            },
+            "required": false,
+            "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company CUSIP",
+            "name": "cusip",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company ISIN",
+              "example": "US5949181045"
+            },
+            "required": false,
+            "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company ISIN",
+            "name": "isin",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Stock prices",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "date": {
+                        "type": "string",
+                        "example": "2025-07-10"
+                      },
+                      "price": {
+                        "type": "number",
+                        "example": 195.38
+                      }
+                    },
+                    "required": [
+                      "date",
+                      "price"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Missing required parameters: either Company Key, CUSIP, ISIN, or Ticker + Exchange"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Invalid api key"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Not Found"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/company/filings": {
+      "get": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Get filings for a company",
+        "description": "Retrieves a list of filings for the specified company from the last 20 years.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "operationId": "get_CompanyFilings",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "description": "API Key (alternatively send via X-Api-Key header)"
+            },
+            "required": false,
+            "description": "API Key (alternatively send via X-Api-Key header)",
+            "name": "apiKey",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company ticker (use with exchange, or alone to auto-detect exchange)",
+              "example": "MSFT"
+            },
+            "required": false,
+            "description": "Company ticker (use with exchange, or alone to auto-detect exchange)",
+            "name": "ticker",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company exchange (use with ticker)",
+              "example": "NASDAQ"
+            },
+            "required": false,
+            "description": "Company exchange (use with ticker)",
+            "name": "exchange",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company key (alternative to ticker & exchange)",
+              "example": "NASDAQ_MSFT"
+            },
+            "required": false,
+            "description": "Company key (alternative to ticker & exchange)",
+            "name": "companyKey",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company CUSIP",
+              "example": "594918104"
+            },
+            "required": false,
+            "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company CUSIP",
+            "name": "cusip",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company ISIN",
+              "example": "US5949181045"
+            },
+            "required": false,
+            "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company ISIN",
+            "name": "isin",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of filings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "filing_id": {
+                        "type": "string",
+                        "description": "Unique filing identifier",
+                        "example": "0000950170-25-100235"
+                      },
+                      "document_type": {
+                        "type": "string",
+                        "description": "Type of document: Annual Report, Quarterly Report, Press Release, or Other",
+                        "example": "Annual Report"
+                      },
+                      "filing_date": {
+                        "type": "string",
+                        "description": "Date the filing was submitted",
+                        "example": "2025-08-01"
+                      },
+                      "report_date": {
+                        "type": "string",
+                        "description": "Date of the report",
+                        "example": "2025-06-28"
+                      },
+                      "pdf_url": {
+                        "type": "string",
+                        "description": "URL to the PDF of the filing",
+                        "example": "https://api.fiscal.ai/v1/filing/0000950170-25-100235/pdf?ticker=MSFT&exchange=NASDAQ"
+                      }
+                    },
+                    "required": [
+                      "filing_id",
+                      "document_type",
+                      "filing_date",
+                      "report_date",
+                      "pdf_url"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Missing required parameters: either Company Key, CUSIP, ISIN, or Ticker + Exchange"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Invalid api key"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Not Found"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          }
         }
       }
     },
     "/v1/filing/{filingId}/page/{pageNumber}/image": {
       "get": {
-        "tags": ["Filings"],
+        "tags": [
+          "Filings"
+        ],
         "summary": "Get an image of a filing page",
-        "description": "Fetches a high-resolution JPEG image of the specified page from the original SEC filing document.",
-        "security": [{"ApiKeyAuth": []}],
+        "description": "Fetches a high-resolution JPEG image of the specified page from the original SEC filing document. Suitable for embedding in client applications for source traceability.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
         "operationId": "get_SourceImage",
         "parameters": [
-          {"schema": {"type": "string", "example": "0000950170-25-061046"}, "required": true, "name": "filingId", "in": "path"},
-          {"schema": {"type": "number", "example": 3}, "required": true, "name": "pageNumber", "in": "path"},
-          {"schema": {"type": "string"}, "required": false, "name": "apiKey", "in": "query"},
-          {"schema": {"type": "string", "example": "MSFT"}, "required": false, "name": "ticker", "in": "query"},
-          {"schema": {"type": "string", "example": "NASDAQ"}, "required": false, "name": "exchange", "in": "query"}
+          {
+            "schema": {
+              "type": "string",
+              "description": "Filing ID",
+              "example": "0000950170-25-061046"
+            },
+            "required": true,
+            "description": "Filing ID",
+            "name": "filingId",
+            "in": "path"
+          },
+          {
+            "schema": {
+              "type": "number",
+              "description": "Page number",
+              "example": 3
+            },
+            "required": true,
+            "description": "Page number",
+            "name": "pageNumber",
+            "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "API Key (alternatively send via X-Api-Key header)"
+            },
+            "required": false,
+            "description": "API Key (alternatively send via X-Api-Key header)",
+            "name": "apiKey",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company ticker (use with exchange, or alone to auto-detect exchange)",
+              "example": "MSFT"
+            },
+            "required": false,
+            "description": "Company ticker (use with exchange, or alone to auto-detect exchange)",
+            "name": "ticker",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company exchange (use with ticker)",
+              "example": "NASDAQ"
+            },
+            "required": false,
+            "description": "Company exchange (use with ticker)",
+            "name": "exchange",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company key (alternative to ticker & exchange)",
+              "example": "NASDAQ_MSFT"
+            },
+            "required": false,
+            "description": "Company key (alternative to ticker & exchange)",
+            "name": "companyKey",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company CUSIP",
+              "example": "594918104"
+            },
+            "required": false,
+            "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company CUSIP",
+            "name": "cusip",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company ISIN",
+              "example": "US5949181045"
+            },
+            "required": false,
+            "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company ISIN",
+            "name": "isin",
+            "in": "query"
+          }
         ],
         "responses": {
           "200": {
             "description": "Page image",
+            "contentType": "image/jpeg"
+          },
+          "400": {
+            "description": "Bad Request",
             "content": {
-              "image/jpeg": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Missing required parameters: either Company Key, CUSIP, ISIN, or Ticker + Exchange"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
                 }
               }
             }
           },
-          "400": {"description": "Bad Request", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
-          "403": {"description": "Forbidden", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
-          "404": {"description": "Not Found", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}}
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Invalid api key"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Not Found"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          }
         }
       }
     },
     "/v1/filing/{filingId}/pdf": {
       "get": {
-        "tags": ["Filings"],
+        "tags": [
+          "Filings"
+        ],
         "summary": "Get the full PDF of a filing",
         "description": "Downloads the complete PDF version of the SEC filing referenced by its accession number.",
-        "security": [{"ApiKeyAuth": []}],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
         "operationId": "get_SourcePdf",
         "parameters": [
-          {"schema": {"type": "string", "example": "0000950170-25-061046"}, "required": true, "name": "filingId", "in": "path"},
-          {"schema": {"type": "string"}, "required": false, "name": "apiKey", "in": "query"},
-          {"schema": {"type": "string", "example": "MSFT"}, "required": false, "name": "ticker", "in": "query"},
-          {"schema": {"type": "string", "example": "NASDAQ"}, "required": false, "name": "exchange", "in": "query"}
+          {
+            "schema": {
+              "type": "string",
+              "description": "Filing ID",
+              "example": "0000950170-25-061046"
+            },
+            "required": true,
+            "description": "Filing ID",
+            "name": "filingId",
+            "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "API Key (alternatively send via X-Api-Key header)"
+            },
+            "required": false,
+            "description": "API Key (alternatively send via X-Api-Key header)",
+            "name": "apiKey",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company ticker (use with exchange, or alone to auto-detect exchange)",
+              "example": "MSFT"
+            },
+            "required": false,
+            "description": "Company ticker (use with exchange, or alone to auto-detect exchange)",
+            "name": "ticker",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company exchange (use with ticker)",
+              "example": "NASDAQ"
+            },
+            "required": false,
+            "description": "Company exchange (use with ticker)",
+            "name": "exchange",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company key (alternative to ticker & exchange)",
+              "example": "NASDAQ_MSFT"
+            },
+            "required": false,
+            "description": "Company key (alternative to ticker & exchange)",
+            "name": "companyKey",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company CUSIP",
+              "example": "594918104"
+            },
+            "required": false,
+            "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company CUSIP",
+            "name": "cusip",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company ISIN",
+              "example": "US5949181045"
+            },
+            "required": false,
+            "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company ISIN",
+            "name": "isin",
+            "in": "query"
+          }
         ],
         "responses": {
           "200": {
             "description": "Filing PDF",
+            "contentType": "application/pdf"
+          },
+          "400": {
+            "description": "Bad Request",
             "content": {
-              "application/pdf": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Missing required parameters: either Company Key, CUSIP, ISIN, or Ticker + Exchange"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
                 }
               }
             }
           },
-          "400": {"description": "Bad Request", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
-          "403": {"description": "Forbidden", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
-          "404": {"description": "Not Found", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}}
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Invalid api key"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Not Found"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/company/earnings-summary": {
+      "get": {
+        "tags": [
+          "Earnings"
+        ],
+        "summary": "Get the latest earnings summary for a company",
+        "description": "Returns the latest quarterly EPS and revenue figures as reported by the company, mimicking a typical earnings calendar payload.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "operationId": "get_EarningsSummary",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "description": "API Key (alternatively send via X-Api-Key header)"
+            },
+            "required": false,
+            "description": "API Key (alternatively send via X-Api-Key header)",
+            "name": "apiKey",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company ticker (use with exchange, or alone to auto-detect exchange)",
+              "example": "MSFT"
+            },
+            "required": false,
+            "description": "Company ticker (use with exchange, or alone to auto-detect exchange)",
+            "name": "ticker",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company exchange (use with ticker)",
+              "example": "NASDAQ"
+            },
+            "required": false,
+            "description": "Company exchange (use with ticker)",
+            "name": "exchange",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Company key (alternative to ticker & exchange)",
+              "example": "NASDAQ_MSFT"
+            },
+            "required": false,
+            "description": "Company key (alternative to ticker & exchange)",
+            "name": "companyKey",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company CUSIP",
+              "example": "594918104"
+            },
+            "required": false,
+            "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company CUSIP",
+            "name": "cusip",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company ISIN",
+              "example": "US5949181045"
+            },
+            "required": false,
+            "description": "Requires CUSIP/ISIN license. An alternative to ticker & exchange. Company ISIN",
+            "name": "isin",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Earnings summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "symbol": {
+                        "type": "string"
+                      },
+                      "date": {
+                        "type": "string"
+                      },
+                      "period": {
+                        "type": "string"
+                      },
+                      "epsActual": {
+                        "type": "number"
+                      },
+                      "revenueActual": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "symbol",
+                      "date",
+                      "period"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Missing required parameters: either Company Key, CUSIP, ISIN, or Ticker + Exchange"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Invalid api key"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "Not Found"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          }
         }
       }
     }
