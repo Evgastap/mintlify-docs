@@ -1,0 +1,54 @@
+---
+title: Fiscal.ai API - Getting Started
+---
+
+*A guide to help you get started with the Fiscal.ai API using a free trial.*
+
+### 1. Click `Manage API Keys` at top right of screen or click this <a href="https://fiscal.ai/onboarding/org/create/api">link</a>
+
+### 2. Create an organization
+<img src="/create-org.png" width="80%" quality="100" unoptimized></img>
+
+### 3. Navigate to Data API
+<img src="/navigate-to-data-api.png" width="80%" quality="100" unoptimized></img>
+
+### 4. Create an API key, this api key will be used on every request to Fiscal.ai API with `&apiKey=YOUR_API_KEY` on each request
+<img src="/create-key.png" width="90%" quality="100" unoptimized></img>
+
+### 5. Try these common workflows:
+
+**Get company profile and basic info:**
+```bash
+curl "https://api.fiscal.ai/v1/company/profile?companyKey=NASDAQ_MSFT&apiKey=YOUR_API_KEY"
+```
+
+**Get financial ratios for analysis:**
+```bash
+curl "https://api.fiscal.ai/v1/company/ratios?companyKey=NASDAQ_MSFT&apiKey=YOUR_API_KEY"
+```
+
+**Compare two companies:**
+```bash
+# Microsoft ratios
+curl "https://api.fiscal.ai/v1/company/ratios?companyKey=NASDAQ_MSFT&apiKey=YOUR_API_KEY"
+
+# Apple ratios for comparison  
+curl "https://api.fiscal.ai/v1/company/ratios?companyKey=NASDAQ_AAPL&apiKey=YOUR_API_KEY"
+```
+
+**Get latest quarterly earnings:**
+```bash
+curl "https://api.fiscal.ai/v1/company/financials/income-statement/standardized?companyKey=NASDAQ_MSFT&period_type=quarterly&apiKey=YOUR_API_KEY"
+```
+
+<Info>
+Replace `YOUR_API_KEY` with your actual API key from step 4
+</Info>
+
+### 6. Next Steps
+
+- **Explore all endpoints**: [Full API Reference](/api-reference)
+- **View available ratios**: [Ratios List](/resources/ratios)  
+- **Set up webhooks**: [Webhooks Guide](/guides/webhooks)
+- **Try MCP integration**: [MCP Setup](/guides/mcp-integration)
+

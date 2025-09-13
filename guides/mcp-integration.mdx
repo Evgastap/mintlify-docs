@@ -1,0 +1,171 @@
+---
+title: MCP Integration - Model Context Protocol
+---
+
+## What is MCP (Model Context Protocol)?
+
+The Model Context Protocol (MCP) is an open standard developed by Anthropic that enables AI assistants to connect with external data sources and tools through a standardized interface. It acts as a bridge between AI models and various systems, allowing models to access real-time data, execute functions, and interact with external services seamlessly.
+
+## Fiscal.ai MCP Server
+
+Fiscal.ai provides a native MCP server that exposes our entire financial data API through the Model Context Protocol. This allows you to build a custom chatbot that can query our financial data API with only a few lines of code.
+
+### How It Works
+
+The Fiscal.ai MCP server implements the MCP specification through Server-Sent Events (SSE). Here's the architecture:
+
+1. **MCP Client** (Claude Desktop, etc.) connects to our MCP endpoint
+2. **Authentication** happens via the `x-api-key` header, tied directly to your Fiscal.ai API key
+3. **Tool Calls** are routed through our existing REST API infrastructure, respecting the limits and access control of your Fiscal.ai API key
+4. **Responses** are formatted according to MCP standards and streamed back
+
+## Available Tools
+
+The MCP server exposes **15 tools** that cover all major aspects of our financial data:
+
+### Company Data
+
+- **`companies_list`** - Get list of all available companies
+- **`company_profile`** - Detailed company information and metadata
+- **`company_earnings_summary`** - Executive summary of earnings data
+
+### Financial Statements
+
+- **`company_financials_as_reported`** - Raw financial statements as filed with SEC
+- **`company_financials_standardized`** - Normalized financial data across companies
+- **`standardized_metrics_list`** - Available standardized metrics by industry template
+
+### Financial Analysis
+
+- **`ratios_list`** - All available financial ratios and their definitions
+- **`company_ratios`** - Company's calculated financial ratios
+- **`company_daily_ratios`** - Time series data for specific ratios
+
+### Market Data
+
+- **`company_shares_outstanding`** - Share count data over time
+- **`company_stock_splits`** - Stock split history
+- **`company_stock_prices`** - Historical price data (15-minute delay)
+
+### Business Intelligence
+
+- **`company_segments_and_kpis`** - Business segment performance and KPIs
+
+### Document Access
+
+- **`filing_page_image`** - Extract specific pages from SEC filings as images
+- **`filing_pdf`** - Download complete SEC filings as PDFs
+
+## Setup Guide
+
+### 1. Obtain API Access
+
+Get your Fiscal.ai API key by following our [Getting Started guide](/guides/getting-started). The same API key works for both REST API and MCP access.
+
+### 2. Configure Your MCP Client
+
+#### For Claude Desktop, and other UI-based MCP Clients
+
+Add this configuration to your `~/.claude/mcp.json`, or any other MCP client configuration file.
+
+```json
+{
+  "mcpServers": {
+    "fiscal": {
+      "url": "https://api.fiscal.ai/mcp/sse",
+      "headers": {
+        "x-api-key": "YOUR_API_KEY"
+      }
+    }
+  }
+}
+```
+
+<Warning>
+**Authentication**
+
+Replace `YOUR_API_KEY` with your actual Fiscal.ai API key. The MCP server validates API keys the same way as our REST API.
+</Warning>
+
+### 3. Restart Your MCP Client
+
+After adding the configuration, restart Claude Desktop or your MCP client to load the new server connection.
+
+## Testing Your MCP Connection
+
+You can test your MCP server connection using the official MCP Inspector tool:
+
+```bash
+npx @modelcontextprotocol/inspector@latest
+```
+
+This opens a web-based UI where you can:
+
+- Test all available tools with interactive forms
+- Browse company data and financial statements
+- Execute queries and view responses in real-time
+- Debug connection issues and validate your API key
+
+The inspector supports both SSE and HTTP transport types, making it perfect for testing our Fiscal.ai MCP server.
+
+## Usage Examples
+
+Once connected, you can ask natural language questions about financial data:
+
+**Company Analysis:**
+
+- "What's Apple's current P/E ratio compared to Microsoft?"
+- "Show me Tesla's quarterly revenue growth over the last 2 years"
+- "Compare the profit margins of Netflix and Disney"
+
+**Financial Statements:**
+
+- "Get Amazon's latest cash flow statement"
+- "Show me the balance sheet for NVIDIA as reported in their 10-K"
+- "What are Google's standardized income statement metrics?"
+
+**Market Data:**
+
+- "Has Apple had any stock splits recently?"
+- "Show me the daily stock price trend for Microsoft this year"
+- "What's the current shares outstanding for Tesla?"
+
+**Document Research:**
+
+- "Get page 15 of Tesla's latest 10-K filing as an image"
+- "Download the PDF of Apple's most recent earnings report"
+
+## Data Formats
+
+The MCP can query the data exactly the same way as the rest of the API.
+
+### Company Identifiers
+
+All tools use the format: `<EXCHANGE>_<TICKER>`
+
+- Apple: `NASDAQ_AAPL`
+- Tesla: `NASDAQ_TSLA`
+- Microsoft: `NASDAQ_MSFT`
+
+### Financial Statement Types
+
+- `income-statement` - Revenue, expenses, net income
+- `balance-sheet` - Assets, liabilities, equity
+- `cash-flow-statement` - Operating, investing, financing cash flows
+
+### Industry Templates
+
+For standardized metrics:
+
+- `standard` - General industry metrics
+- `capital-markets` - Banks, investment firms
+- `financials` - Financial services
+- `insurance` - Insurance companies
+- `real-estate` - REITs and real estate
+- `utilities` - Utility companies
+
+<Info>
+**Free Trial Limitations**
+
+The MCP server is available for all plans, but the free trial is limited to a subset of companies and rate limit. This will also be the case for your MCP server.
+</Info>

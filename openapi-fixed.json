@@ -1,0 +1,264 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Fiscal.ai API",
+    "description": "Comprehensive financial data API for public companies including financial statements, ratios, stock prices, and corporate filings."
+  },
+  "servers": [
+    {
+      "url": "https://api.fiscal.ai",
+      "description": "Production server"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "query",
+        "name": "apiKey"
+      },
+      "HeaderApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Api-Key"
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              },
+              "required": ["message"]
+            }
+          }
+        },
+        "required": ["errors"]
+      }
+    }
+  },
+  "paths": {
+    "/v1/companies-list": {
+      "get": {
+        "tags": ["Companies"],
+        "summary": "Get a list of all companies",
+        "description": "Lists all companies available in the dataset together with basic descriptors and the types of data available for each company.",
+        "security": [{"ApiKeyAuth": []}],
+        "operationId": "get_CompaniesList",
+        "parameters": [
+          {
+            "schema": {"type": "string", "description": "API Key (alternatively send via X-Api-Key header)"},
+            "required": false,
+            "description": "API Key (alternatively send via X-Api-Key header)",
+            "name": "apiKey",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of companies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {"type": "string", "example": "Visa Inc."},
+                      "ticker": {"type": "string", "example": "V"},
+                      "cik": {"type": "string", "example": "1403161"},
+                      "exchangeName": {"type": "string", "example": "New York Stock Exchange"},
+                      "exchangeSymbol": {"type": "string", "example": "NYSE"},
+                      "countryName": {"type": "string", "example": "United States"},
+                      "countryCode": {"type": "string", "example": "US"},
+                      "sector": {"type": "string", "example": "Financials"},
+                      "industryGroup": {"type": "string", "example": "Financial Services"},
+                      "industry": {"type": "string", "example": "Financial Services"},
+                      "subIndustry": {"type": "string", "example": "Transaction & Payment Processing Services"},
+                      "reportingTemplate": {"type": "string", "example": "Standard"},
+                      "dataAvailable": {"type": "array", "items": {"type": "string", "example": "financials"}},
+                      "cusip": {"type": "array", "items": {"type": "string", "example": "92826C839"}},
+                      "isin": {"type": "array", "items": {"type": "string", "example": "US92826C8394"}}
+                    },
+                    "required": ["name", "ticker", "exchangeName", "exchangeSymbol", "countryName", "countryCode", "sector", "industryGroup", "industry", "subIndustry", "reportingTemplate", "dataAvailable", "cusip", "isin"]
+                  }
+                }
+              }
+            }
+          },
+          "400": {"description": "Bad Request", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
+          "403": {"description": "Forbidden", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
+          "404": {"description": "Not Found", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}}
+        }
+      }
+    },
+    "/v1/company/profile": {
+      "get": {
+        "tags": ["Companies"],
+        "summary": "Get profile for a single company",
+        "description": "Retrieves a detailed company profile including sector, industry, descriptions and lists the datasets currently available under the Fiscal.ai system.",
+        "security": [{"ApiKeyAuth": []}],
+        "operationId": "get_CompanyProfile",
+        "parameters": [
+          {"schema": {"type": "string"}, "required": false, "name": "apiKey", "in": "query"},
+          {"schema": {"type": "string", "example": "MSFT"}, "required": false, "name": "ticker", "in": "query"},
+          {"schema": {"type": "string", "example": "NASDAQ"}, "required": false, "name": "exchange", "in": "query"},
+          {"schema": {"type": "string", "example": "NASDAQ_MSFT"}, "required": false, "name": "companyKey", "in": "query"}
+        ],
+        "responses": {
+          "200": {
+            "description": "Company profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {"type": "string"},
+                    "ticker": {"type": "string"},
+                    "exchangeName": {"type": "string"},
+                    "exchangeSymbol": {"type": "string"},
+                    "countryName": {"type": "string"},
+                    "countryCode": {"type": "string"},
+                    "sector": {"type": "string"},
+                    "industryGroup": {"type": "string"},
+                    "industry": {"type": "string"},
+                    "subIndustry": {"type": "string"},
+                    "reportingTemplate": {"type": "string"},
+                    "description": {"type": "string"},
+                    "shortDescription": {"type": "string"}
+                  }
+                }
+              }
+            }
+          },
+          "400": {"description": "Bad Request", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
+          "403": {"description": "Forbidden", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
+          "404": {"description": "Not Found", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}}
+        }
+      }
+    },
+    "/v1/company/shares-outstanding": {
+      "get": {
+        "tags": ["Shares Outstanding"],
+        "summary": "Get the latest shares outstanding for a company",
+        "description": "Returns the total number of shares outstanding and detailed share-class breakdown as of the latest available filing for the company.",
+        "security": [{"ApiKeyAuth": []}],
+        "operationId": "get_CompanySharesOutstanding",
+        "parameters": [
+          {"schema": {"type": "string"}, "required": false, "name": "apiKey", "in": "query"},
+          {"schema": {"type": "string", "example": "MSFT"}, "required": false, "name": "ticker", "in": "query"},
+          {"schema": {"type": "string", "example": "NASDAQ"}, "required": false, "name": "exchange", "in": "query"},
+          {"schema": {"type": "string", "example": "NASDAQ_MSFT"}, "required": false, "name": "companyKey", "in": "query"}
+        ],
+        "responses": {
+          "200": {
+            "description": "Shares outstanding",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "date": {"type": "string", "example": "2025-04-28"},
+                      "totalSharesOutstanding": {"type": "number", "example": 908047623},
+                      "shareClasses": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "shareClass": {"type": "string", "example": "Class A"},
+                            "isMainShareClass": {"type": "boolean", "example": true},
+                            "sharesOutstanding": {"type": "number", "example": 901263158},
+                            "conversionRate": {"type": "number", "example": 1},
+                            "sourceDocument": {"type": "string", "example": "https://api.fiscal.ai/v1/filing/0001141391-25-000090/pdf?ticker=MA&exchange=NYSE"}
+                          },
+                          "required": ["shareClass", "isMainShareClass", "sharesOutstanding", "sourceDocument"]
+                        }
+                      }
+                    },
+                    "required": ["date", "totalSharesOutstanding", "shareClasses"]
+                  }
+                }
+              }
+            }
+          },
+          "403": {"description": "Forbidden", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
+          "404": {"description": "Not Found", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}}
+        }
+      }
+    },
+    "/v1/filing/{filingId}/page/{pageNumber}/image": {
+      "get": {
+        "tags": ["Filings"],
+        "summary": "Get an image of a filing page",
+        "description": "Fetches a high-resolution JPEG image of the specified page from the original SEC filing document.",
+        "security": [{"ApiKeyAuth": []}],
+        "operationId": "get_SourceImage",
+        "parameters": [
+          {"schema": {"type": "string", "example": "0000950170-25-061046"}, "required": true, "name": "filingId", "in": "path"},
+          {"schema": {"type": "number", "example": 3}, "required": true, "name": "pageNumber", "in": "path"},
+          {"schema": {"type": "string"}, "required": false, "name": "apiKey", "in": "query"},
+          {"schema": {"type": "string", "example": "MSFT"}, "required": false, "name": "ticker", "in": "query"},
+          {"schema": {"type": "string", "example": "NASDAQ"}, "required": false, "name": "exchange", "in": "query"}
+        ],
+        "responses": {
+          "200": {
+            "description": "Page image",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {"description": "Bad Request", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
+          "403": {"description": "Forbidden", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
+          "404": {"description": "Not Found", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}}
+        }
+      }
+    },
+    "/v1/filing/{filingId}/pdf": {
+      "get": {
+        "tags": ["Filings"],
+        "summary": "Get the full PDF of a filing",
+        "description": "Downloads the complete PDF version of the SEC filing referenced by its accession number.",
+        "security": [{"ApiKeyAuth": []}],
+        "operationId": "get_SourcePdf",
+        "parameters": [
+          {"schema": {"type": "string", "example": "0000950170-25-061046"}, "required": true, "name": "filingId", "in": "path"},
+          {"schema": {"type": "string"}, "required": false, "name": "apiKey", "in": "query"},
+          {"schema": {"type": "string", "example": "MSFT"}, "required": false, "name": "ticker", "in": "query"},
+          {"schema": {"type": "string", "example": "NASDAQ"}, "required": false, "name": "exchange", "in": "query"}
+        ],
+        "responses": {
+          "200": {
+            "description": "Filing PDF",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {"description": "Bad Request", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
+          "403": {"description": "Forbidden", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
+          "404": {"description": "Not Found", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}}
+        }
+      }
+    }
+  },
+  "webhooks": {}
+}

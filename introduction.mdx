@@ -1,0 +1,78 @@
+---
+title: Fiscal.ai API Documentation
+---
+
+## Fiscal.ai API Documentation
+
+Welcome to the Fiscal.ai API documentation. This API provides access to comprehensive financial data for public companies, including financial statements, ratios, stock prices, and corporate filings.
+
+Data for most companies in our coverage is updated within **minutes** of public disclosure.
+
+### API Overview
+
+The Fiscal.ai API offers the following data categories:
+
+- **Company Information**: Company profiles and basic details
+- **Financial Statements**: Income statements, balance sheets, and cash flow statements in both standardized and as-reported formats
+- **Financial Ratios**: Comprehensive ratio calculations with daily updates
+- **Segments & KPIs**: Business segment data and key performance indicators
+- **Stock Data**: Stock prices with 15-minute delay
+- **Corporate Actions**: Stock splits and other corporate events
+- **Filing Data**: Access to original SEC filings with sourcing capabilities
+
+### Understanding As-Reported vs Standardized Data
+
+**As-Reported Data**: Raw financial data exactly as companies filed it with the SEC
+- Company-specific line item names (e.g., "Products", "Services Revenue", "iPhone Sales")  
+- Varying formats and structures between companies
+- Direct from 10-K, 10-Q filings
+
+**Standardized Data**: Normalized data mapped to common schema for comparison
+- Consistent metric names across all companies (e.g., "Total Revenues")
+- **Includes the underlying as-reported data** showing the mapping
+- Each standardized metric shows which as-reported items were used and how (addition, subtraction)
+
+**Key Relationship**: Standardized data is **not separate** from as-reported data - it's as-reported data **plus the mapping layer**. When you get standardized data, you see both the final standardized number AND the underlying as-reported components that created it.
+
+**Example**: 
+- Apple's "Total Revenues" (standardized) = "Products" + "Services" (as-reported)
+- Microsoft's "Total Revenues" (standardized) = "Product Revenue" + "Service Revenue" (as-reported)  
+- Both map to the same standardized metric for easy comparison
+
+### Data Quality
+
+- **Filing Sourcing**: Direct links to source filings for data verification
+- **Real-time Updates**: Data updated within minutes of public disclosure
+
+### Coverage
+
+- 🇺🇸 **United States**: Full coverage of US public companies
+- **Exchanges**: NASDAQ, NYSE, and other major US exchanges
+
+### Coming soon
+
+- 🇨🇦 **Canada**: Full coverage of Canadian public companies
+- **Other geographies**: Coming soon
+
+### Key Concepts
+
+**Company Identification**: Use any of these methods to identify companies in API calls:
+- **Company Key**: `EXCHANGE_TICKER` format (e.g., `NASDAQ_MSFT`, `NYSE_AAPL`)  
+- **Ticker + Exchange**: Separate parameters (e.g., `ticker=MSFT&exchange=NASDAQ`)
+- **CUSIP or ISIN**: Alternative standard identifiers
+
+**Authentication**: Two methods supported:
+- **Query parameter**: `?apiKey=YOUR_KEY`
+- **Header**: `X-Api-Key: YOUR_KEY`
+
+**Period Types**: Financial data available in multiple formats:
+- `annual` - Annual financial statements
+- `quarterly` - Quarterly financial statements  
+- `ltm` - Last twelve months
+- `ytd` - Year to date
+
+### Getting Started
+
+To begin using the API:
+
+See the [Getting Started guide](/guides/getting-started) for step-by-step instructions.

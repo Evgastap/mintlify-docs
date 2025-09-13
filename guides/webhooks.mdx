@@ -1,0 +1,116 @@
+---
+title: Webhooks - Real-time Financial Data Updates
+---
+
+## What are Webhooks?
+
+Webhooks allow you to receive real-time notifications when financial data is updated for companies in your coverage. Instead of polling our API repeatedly, you can configure webhook endpoints that we'll call whenever new financial statements, ratios, or other data becomes available.
+
+## Setup and Management
+
+### Adding a Webhook
+
+1. **Access Organization Dashboard**: Navigate to your organization dashboard through the "Manage API Keys" link
+2. **Configure Webhook URL**: Add your webhook endpoint URL that can receive HTTP POST requests
+3. **Enable/Disable**: Toggle webhooks on or off as needed through the dashboard
+
+<Warning>
+**Webhook URL Requirements**
+
+Your webhook endpoint must:
+- Accept HTTP POST requests
+- Return HTTP status codes 200-299 for successful processing
+- Be publicly accessible (no localhost or private network URLs)
+- Respond within 20 seconds to avoid timeouts
+</Warning>
+
+### Managing Webhooks
+
+All webhook management is done through your organization dashboard:
+
+- **View Active Webhooks**: See all configured webhook endpoints
+- **Enable/Disable**: Turn webhooks on or off without deleting the configuration
+- **Update URLs**: Modify webhook endpoints as needed
+- **Monitor Delivery**: Track webhook delivery status and failures
+
+## Webhook Payload
+
+When financial data is updated, we'll send a POST request to your configured webhook URL with the following JSON payload:
+
+```json
+{
+  "event_type": "financial_data_updated",
+  "timestamp": "2024-01-15T10:30:00.000Z",
+  "company_key": "NASDAQ_AAPL",
+  "statement_type": "income_statement",
+  "file_type": "financial_data_as_reported",
+  "metadata": {
+    "source": "project-atlas",
+    "version": "1.0"
+  }
+}
+```
+
+### Payload Fields
+
+| Field            | Type   | Description                                         |
+| ---------------- | ------ | --------------------------------------------------- |
+| `event_type`     | string | Always `"financial_data_updated"` for data updates  |
+| `timestamp`      | string | ISO 8601 timestamp when the data was updated        |
+| `company_key`    | string | Company identifier in `EXCHANGE_TICKER` format      |
+| `statement_type` | string | Type of financial statement updated (if applicable) |
+| `file_type`      | string | Specific data type that was updated                 |
+| `metadata`       | object | Additional metadata about the update                |
+
+### File Types
+
+The `file_type` field indicates what type of data was updated:
+
+- **`financial_data_as_reported`** - any updates to as-reported or standardized financial data
+- **`template_metric_mapping`** - any additions, removals or renamings of standardized metrics
+- **`eps_and_waso`** - any updates to earnings per share and weighted average shares outstanding
+- **`shares_outstanding`** - any updates to shares outstanding data
+
+**Future Events:**
+We're planning to add webhook support for additional data types including company profiles, filing information, and segments/KPIs data as we expand our real-time notification system.
+
+### Statement Types
+
+When applicable, the `statement_type` field will contain:
+
+- **`income_statement`** - Income statement data
+- **`balance_sheet`** - Balance sheet data
+- **`cash_flow_statement`** - Cash flow statement data
+
+## Reliability and Retries
+
+### Automatic Retries
+
+Our webhook system includes automatic retry logic:
+
+- **Maximum Retries**: 2 additional attempts after the initial request
+- **Retry Delay**: 5 seconds between retry attempts
+- **Timeout**: 20 seconds per request
+- **Total Window**: Up to 30 seconds for all attempts
+
+### Error Handling
+
+We consider a webhook delivery successful when your endpoint returns HTTP status codes 200-299. Other status codes or timeouts will trigger retries.
+
+### Best Practices
+
+1. **Idempotency**: Handle duplicate webhook deliveries gracefully using the `timestamp` and `company_key` fields
+2. **Fast Response**: Acknowledge webhooks quickly and process data asynchronously if needed
+3. **Error Logging**: Log webhook failures for debugging
+4. **Validation**: Verify webhook payloads match the expected format
+
+## Security Considerations
+
+<Info>
+**Security Best Practices**
+
+- **HTTPS Only**: Always use HTTPS endpoints for webhook URLs
+- **Validation**: Validate incoming payloads match expected format
+- **Rate Limiting**: Implement rate limiting on your webhook endpoints
+- **Monitoring**: Monitor for unusual webhook activity
+</Info>
